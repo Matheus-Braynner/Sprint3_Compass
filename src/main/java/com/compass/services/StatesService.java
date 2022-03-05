@@ -5,7 +5,6 @@ import java.util.Optional;
 
 import javax.persistence.EntityNotFoundException;
 
-import org.hibernate.ResourceClosedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;

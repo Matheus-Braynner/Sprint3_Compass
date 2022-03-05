@@ -3,6 +3,8 @@ package com.compass.resources;
 import java.net.URI;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -38,6 +40,7 @@ public class StatesResource {
 	}
 	
 	@PostMapping
+	@Transactional
 	public ResponseEntity<States> insert(@RequestBody States obj) {
 		obj = statesService.insert(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
@@ -45,12 +48,14 @@ public class StatesResource {
 	}
 	
 	@DeleteMapping(value = "/{id}")
+	@Transactional
 	public ResponseEntity<Void> delete(@PathVariable Long id) {
 		statesService.delete(id);
 		return ResponseEntity.noContent().build();
 	}
 	
 	@PutMapping(value = "/{id}")
+	@Transactional
 	public ResponseEntity<States> update(@PathVariable Long id, @RequestBody States obj) {
 		obj = statesService.update(id, obj);
 		return ResponseEntity.ok().body(obj);
