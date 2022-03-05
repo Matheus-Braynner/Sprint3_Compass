@@ -1,20 +1,33 @@
 package com.compass.entities;
 
 
+import java.io.Serializable;
 import java.util.Objects;
+
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 import com.compass.entities.enums.Regions;
 
-public class States {
-
+@Entity
+public class States implements Serializable {
+	private static final long serialVersionUID = 1L;
+	
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	@Enumerated(EnumType.STRING)
 	private Regions regions;
 	private String name;
 	private Integer population;
 	private Integer area;
 	private String capital;
 	
-	public States(Regions regions, String name, Integer population, Integer area, String capital) {
+	public States(Long id, Regions regions, String name, Integer population, Integer area, String capital) {
+		this.id = id;
 		this.regions = regions;
 		this.name = name;
 		this.population = population;
