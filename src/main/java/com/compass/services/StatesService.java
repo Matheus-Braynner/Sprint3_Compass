@@ -23,4 +23,8 @@ public class StatesService {
 		Optional<States> obj = statesRepository.findById(id);
 		return obj.get();
 	}
+	
+	public States insert (States obj) {
+		return statesRepository.save(obj);
+	}
 }

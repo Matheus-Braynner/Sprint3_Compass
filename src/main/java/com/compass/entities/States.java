@@ -26,6 +26,10 @@ public class States implements Serializable {
 	private Integer area;
 	private String capital;
 	
+	public States() {
+		
+	}
+	
 	public States(Long id, Regions regions, String name, Integer population, Integer area, String capital) {
 		this.id = id;
 		this.regions = regions;
