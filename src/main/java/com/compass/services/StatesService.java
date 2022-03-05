@@ -31,4 +31,19 @@ public class StatesService {
 	public void delete (Long id) {
 		statesRepository.deleteById(id);
 	}
+	
+	public States update(Long id, States obj) {
+		States entity = statesRepository.getById(id);
+		updateData(entity, obj);
+		return statesRepository.save(entity);
+	}
+
+	private void updateData(States entity, States obj) {
+		entity.setRegions(obj.getRegions());
+		entity.setName(obj.getName());
+		entity.setArea(obj.getArea());
+		entity.setPopulation(obj.getPopulation());
+		entity.setCapital(obj.getCapital());
+		
+	}
 }
