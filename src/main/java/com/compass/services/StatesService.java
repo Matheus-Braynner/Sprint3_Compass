@@ -27,4 +27,8 @@ public class StatesService {
 	public States insert (States obj) {
 		return statesRepository.save(obj);
 	}
+	
+	public void delete (Long id) {
+		statesRepository.deleteById(id);
+	}
 }
