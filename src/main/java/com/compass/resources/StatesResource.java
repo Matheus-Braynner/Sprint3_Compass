@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -40,7 +39,7 @@ public class StatesResource {
 
 	@GetMapping
 	public Page<StatesDto> findAll(@PageableDefault(sort = {"regions" , "population", "area"} 
-	, direction = Direction.DESC, page = 0, size = 10) Pageable pagination) {
+	, direction = Direction.DESC, page = 0, size = 50) Pageable pagination) {
 		
 		Page<States> list = statesRepository.findAll(pagination);
 		return StatesDto.convert(list);
