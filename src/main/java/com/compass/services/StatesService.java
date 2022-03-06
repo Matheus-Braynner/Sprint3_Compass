@@ -8,6 +8,7 @@ import javax.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.compass.entities.States;
@@ -21,7 +22,7 @@ public class StatesService {
 	@Autowired
 	private StatesRepository statesRepository;
 
-	public List<States> findAll() {
+	public List<States> findAll(Pageable pageable) {
 		return statesRepository.findAll();
 	}
 
@@ -63,4 +64,5 @@ public class StatesService {
 		entity.setCapital(obj.getCapital());
 		
 	}
+
 }

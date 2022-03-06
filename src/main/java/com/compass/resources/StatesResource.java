@@ -1,11 +1,16 @@
 package com.compass.resources;
 
+
 import java.net.URI;
-import java.util.List;
+
 
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,10 +19,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.compass.entities.States;
+import com.compass.repositories.StatesRepository;
+import com.compass.resources.dto.StatesDto;
 import com.compass.services.StatesService;
 
 @RestController
@@ -26,11 +34,16 @@ public class StatesResource {
 
 	@Autowired
 	private StatesService statesService;
+	
+	@Autowired
+	private StatesRepository statesRepository;
 
 	@GetMapping
-	public ResponseEntity<List<States>> findAll() {
-		List<States> list = statesService.findAll();
-		return ResponseEntity.ok().body(list);
+	public Page<StatesDto> findAll(@PageableDefault(sort = {"regions" , "population", "area"} 
+	, direction = Direction.DESC, page = 0, size = 10) Pageable pagination) {
+		
+		Page<States> list = statesRepository.findAll(pagination);
+		return StatesDto.convert(list);
 	}
 
 	@GetMapping(value = "/{id}")
